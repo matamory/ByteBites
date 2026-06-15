@@ -17,6 +17,13 @@
 - **Transaction contains FoodItem** — A transaction bundles the specific items selected at checkout.
 - **Menu lists FoodItem** — The menu is the authoritative catalog that all transactions reference.
 
+## Design Decisions
+
+- **Customer verification** — Purchase history is stored as Transaction references, allowing the system to verify real users through past activity.
+- **No quantity tracking** — Items are added to a transaction as-is; if a customer selects the same item twice, it appears twice in the items array. This matches the spec requirement without overcomplicating the model.
+- **Category filtering on Menu** — The `getItemsByCategory()` method enables browsing by "Drinks" or "Desserts" without duplicating data.
+- **Computed total cost** — `calculateTotal()` is a behavior, not stored data, ensuring accuracy whenever it's called.
+
 ---
 
 ```mermaid
